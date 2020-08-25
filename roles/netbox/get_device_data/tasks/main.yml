@@ -1,0 +1,18 @@
+### # ---------------------------------------------------
+### # FIND DEVICES AT A SITE
+### # ---------------------------------------------------
+- name: "Retrieve device data from Netbox"
+  uri:
+    url: "{{ netbox.base_url }}/dcim/devices/?site=campus_datacenter"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Token {{ netbox.token }}"
+    force_basic_auth: yes
+    validate_certs: false
+  register: site_devices
+
+- debug:
+    msg: "{{ site_devices }}"

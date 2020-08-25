@@ -1,0 +1,14 @@
+---
+  ### # ---------------------------------------------------
+  ### # GRAB DEVICES FROM NETBOX
+  ### # ---------------------------------------------------
+  - hosts: localhost
+    connection: local
+    gather_facts: false
+    become: false
+    any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
+    roles:
+      ### # ---------------------------------------------------
+      ### # NETBOX WORK
+      ### # ---------------------------------------------------
+      - { role: netbox/get_device_data }
