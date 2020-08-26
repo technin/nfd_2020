@@ -1,0 +1,58 @@
+### # ---------------------------------------------------
+### # CONFIGURE OUR EX SWITCH INSIDE OF MIST
+### # ---------------------------------------------------
+- name: "create the configuration variables"
+  set_fact:
+    switch_config:
+      name: Ohak
+      role: ''
+      notes: ''
+      ip_config:
+        type: dhcp
+        network: netmgmt
+      oob_ip_config:
+        type: dhcp
+        network: netmgmt
+      managed: true
+      "-radius_config": true
+      port_config:
+        ge-1/0/0:
+          usage: mega-access
+        ge-1/0/1:
+          usage: mega-access
+      networks:
+        netmgmt:
+          vlan_id: '65'
+        klingon:
+          vlan_id: '97'
+        Mega-Vlan:
+          vlan_id: '2'
+      port_usages:
+        mega-access:
+          name: mega-access
+          mode: access
+          disabled: false
+          port_network: Mega-Vlan
+          stp_edge: false
+          all_networks: false
+          networks: []
+          port_auth: 
+          speed: auto
+          duplex: auto
+          mac_limit: 0
+          poe_disabled: false
+      "-ntp_servers": true
+      additional_config_cmds:
+      - ''
+
+- name: "configure the switch through the Mist REST API"
+  uri:
+    url: "{{ mist.base_url }}/sites/{{ mist.org_id }}/devices/{{ mist.device_id }}"
+    method: PUT
+    return_content: false
+    status_code: "200"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Token {{ mist.token }}"
+    body: "{{ switch_config | to_json }}"
+    force_basic_auth: yes
