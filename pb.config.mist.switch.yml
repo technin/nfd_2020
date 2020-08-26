@@ -1,0 +1,14 @@
+---
+  ### # ---------------------------------------------------
+  ### # CONFIGURE AN EX SWITCH VIA MIST REST API
+  ### # ---------------------------------------------------
+  - hosts: localhost
+    connection: local
+    gather_facts: false
+    become: false
+    any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
+    roles:
+      ### # ---------------------------------------------------
+      ### # MIST WORK
+      ### # ---------------------------------------------------
+      - { role: mist/configure_switch }
