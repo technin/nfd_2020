@@ -1,9 +1,9 @@
 ### # ---------------------------------------------------
 ### # FIND DEVICES AT A SITE
 ### # ---------------------------------------------------
-- name: "Retrieve device data from Netbox"
+- name: "Retrieves a list of devices from Netbox"
   uri:
-    url: "{{ netbox.base_url }}/dcim/devices/?site=campus_datacenter"
+    url: "{{ netbox.base_url }}/dcim/devices/?site=magnolia"
     method: GET
     return_content: yes
     status_code: "200"
@@ -15,4 +15,5 @@
   register: site_devices
 
 - debug:
-    msg: "{{ site_devices }}"
+    msg: "{{ site_devices.json }}"
+

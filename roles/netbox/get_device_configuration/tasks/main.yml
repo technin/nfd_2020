@@ -1,0 +1,19 @@
+### # ---------------------------------------------------
+### # RETRIEVE CONFIGURATION FROM DEVICES
+### # ---------------------------------------------------
+- name: "Retrieves configuration of a device from Netbox"
+  # uri:
+  #   url: "{{ netbox.base_url }}/dcim/devices/?site=magnolia"
+  #   method: GET
+  #   return_content: yes
+  #   status_code: "200"
+  #   headers:
+  #     Content-Type: "application/json"
+  #     Authorization: "Token {{ netbox.token }}"
+  #   force_basic_auth: yes
+  #   validate_certs: false
+  # register: site_devices
+
+# - debug:
+#     msg: "{{ site_devices.json }}"
+

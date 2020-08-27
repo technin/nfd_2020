@@ -4,7 +4,7 @@
 - name: "create the configuration variables"
   set_fact:
     switch_config:
-      name: Ohak
+      name: redtail-sw2
       role: ''
       notes: ''
       ip_config:
@@ -23,8 +23,6 @@
       networks:
         netmgmt:
           vlan_id: '65'
-        klingon:
-          vlan_id: '97'
         Mega-Vlan:
           vlan_id: '2'
       port_usages:
