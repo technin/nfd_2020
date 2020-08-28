@@ -12,4 +12,4 @@
       ### # NETBOX WORK
       ### # ---------------------------------------------------
       - { role: netbox/get_devices_from_site }
-      - { role: netbox/get_device_configuration }
+      - { role: netbox/get_device_interfaces }
