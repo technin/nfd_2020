@@ -10,6 +10,10 @@
   set_fact:
     switch_config_raw: "{{ lookup('file','tmp/switch_config.yml') }}"
 
+# ### A little explanation is needed here. There are times when loading a file's contents
+# ###   in the way that we did in the previous task, the content will be rendered as a string
+# ###   instead of the YAML dictionary we are hoping for. 
+# ###   This task uses a little logic to account for these situations, forcing a load as a dictionary.
 - name: "store switch_config_raw as switch_config, providing a translation if needed"
   set_fact:
     switch_config: "{{ switch_config_raw if switch_config_raw is mapping else switch_config_raw | from_yaml }}"
@@ -24,7 +28,7 @@
 
 - name: "configure the switch through the Mist REST API"
   uri:
-    url: "{{ mist.base_url }}/sites/f37b7c48-91c3-4118-be1b-26882a879fef/devices/00000000-0000-0000-1000-9ccc83ac77a5"
+    url: "{{ mist.base_url }}/sites/{{ mist.site_id }}/devices/{{ mist.device_id }}"
     method: PUT
     return_content: false
     status_code: "200"
