@@ -1,0 +1,67 @@
+switch_config:
+  role: "switch-l2"
+  ip_config:
+    type: "dhcp"
+    network: "NetMGMT"
+  port_config:
+    - name: "ge-0/0/0"
+      usage: "uplink"
+    - name: "ge-0/0/1"
+      usage: "uplink"
+    - name: "ge-0/0/2"
+      usage: "vmware"
+    - name: "ge-0/0/4"
+      usage: "vmware"
+    - name: "ge-0/0/6"
+      usage: "vmware"
+    - name: "ge-0/0/10"
+      usage: "netmgmt"
+  networks:
+    - name: "NetMGMT"
+      vlan_id: "10"
+    - name: "Employee"
+      vlan_id: "11"
+    - name: "Guest"
+      vlan_id: "12"
+    - name: "IoT"
+      vlan_id: "13"
+    - name: "PCI"
+      vlan_id: "14"
+  port_usages:
+    - name: "vmware"
+      mode: "trunk"
+      disabled: false
+      port_network: "default"
+      stp_edge: false
+      all_networks: true
+      networks: []
+      port_auth:
+      speed: "auto"
+      duplex: "auto"
+      mac_limit: 0
+      poe_disabled: false
+    - name: "ap"
+      mode: "trunk"
+      all_networks: true
+      stp_edge: true
+      port_network: "NetMGMT"
+      disabled: false
+      networks: []
+      port_auth:
+      speed: "auto"
+      duplex: "auto"
+      mac_limit: 0
+      poe_disabled: false
+    - name: "netmgmt"
+      mode: "access"
+      disabled: false
+      port_network: "NetMGMT"
+      stp_edge: true
+      all_networks: false
+      networks: []
+      port_auth:
+      speed: "auto"
+      duplex: "auto"
+      mac_limit: 0
+      poe_disabled: false
+  name: "Magnolia-sw46and3"
