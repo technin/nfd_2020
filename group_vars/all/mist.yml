@@ -1,5 +1,0 @@
-mist:
-  base_url: "https://api.mist.com/api/v1"
-  token: "YOUR_API_TOKEN_GOES_HERE"
-  org_id: "896956a1-abfc-43ca-ae57-f0583ed3cf42"
-  device_id: "00000000-0000-0000-1000-08b258a59ca2"

@@ -1,3 +1,0 @@
-netbox:
-  base_url: "https://netbox.server.home/api"
-  token: "88c6d942d308522140b63ca8b8ec109c47b6f300"
