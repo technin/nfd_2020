@@ -1,0 +1,66 @@
+{# ip_config #}
+{% if switch_config.ip_config is defined %}
+ip_config:
+  type: "{{ switch_config.ip_config.type }}"
+  network: "{{ switch_config.ip_config.network }}"
+{% endif %}
+{# oob_ip_config #}
+{% if switch_config.oob_ip_config is defined %}
+oob_ip_config:
+  type: "{{ switch_config.oob_ip_config.type }}"
+  network: "{{ switch_config.oob_ip_config.network }}"
+{% else %}
+oob_ip_config:
+  type: "dhcp"
+  network: "default"
+{% endif %}
+{# port config #}
+port_config:
+{% for each_interface in switch_config.port_config %}
+  {{ each_interface.name }}:
+    usage: "{{ each_interface.usage }}"
+{% endfor %}
+{# vlans #}
+networks:
+{% for each_vlan in switch_config.networks %}
+  {{ each_vlan.name }}:
+    vlan_id: "{{ each_vlan.vlan_id }}"
+{% endfor %}
+{# configuration templates #}
+port_usages:
+{% for each_config_template in switch_config.port_usages %}
+  {{ each_config_template.name }}:
+    name: "{{ each_config_template.name }}"
+    mode: "{{ each_config_template.mode }}"
+    disabled: {{ each_config_template.disabled | bool }}
+    port_network: "{{ each_config_template.port_network }}"
+    stp_edge: {{ each_config_template.stp_edge | bool }}
+    all_networks: {{ each_config_template.all_networks | bool }}
+    networks: []
+    poe_disabled: {{ each_config_template.poe_disabled | bool }}
+{% endfor %}
+name: "{{ switch_config.name }}"
+{# roles #}
+{% if switch_config.role is defined %}
+role: "{{ switch_config.role }}"
+{% endif %}
+{# notes #}
+{% if switch_config.notes is defined %}
+notes: "{{ switch_config.notes }}"
+{% else %}
+notes: ""
+{% endif %}
+{# managed #}
+{% if switch_config.managed is defined %}
+managed: {{ switch_config.managed | bool }}
+{% else %}
+managed: true
+{% endif %}
+{# RADIUS #}
+{% if switch_config.radius is defined %}
+-radius_config: {{ switch_config.radius | bool }}
+{% else %}
+-radius_config: true
+{% endif %}
+additional_config_cmds:
+- ''

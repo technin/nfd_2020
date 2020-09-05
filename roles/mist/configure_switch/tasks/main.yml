@@ -1,51 +1,30 @@
 ### # ---------------------------------------------------
 ### # CONFIGURE OUR EX SWITCH INSIDE OF MIST
 ### # ---------------------------------------------------
-- name: "create the configuration variables"
+- name: "build the YAML file with Jinja2 based on variables in the switch_config.yml file"
+  template:
+    src: switch_config.j2
+    dest: tmp/switch_config.yml
+
+- name: "store the file's contents as a variable named switch_config"
   set_fact:
-    switch_config:
-      name: redtail-sw2
-      role: ''
-      notes: ''
-      ip_config:
-        type: dhcp
-        network: netmgmt
-      oob_ip_config:
-        type: dhcp
-        network: netmgmt
-      managed: true
-      "-radius_config": true
-      port_config:
-        ge-1/0/0:
-          usage: mega-access
-        ge-1/0/1:
-          usage: mega-access
-      networks:
-        netmgmt:
-          vlan_id: '65'
-        Mega-Vlan:
-          vlan_id: '2'
-      port_usages:
-        mega-access:
-          name: mega-access
-          mode: access
-          disabled: false
-          port_network: Mega-Vlan
-          stp_edge: false
-          all_networks: false
-          networks: []
-          port_auth: 
-          speed: auto
-          duplex: auto
-          mac_limit: 0
-          poe_disabled: false
-      "-ntp_servers": true
-      additional_config_cmds:
-      - ''
+    switch_config_raw: "{{ lookup('file','tmp/switch_config.yml') }}"
+
+- name: "store switch_config_raw as switch_config, providing a translation if needed"
+  set_fact:
+    switch_config: "{{ switch_config_raw if switch_config_raw is mapping else switch_config_raw | from_yaml }}"
+
+- name: "print the variable as yaml to the screen"
+  debug:
+    msg: "{{ switch_config }}"
+
+- name: "print the variable as json to the screen"
+  debug:
+    msg: "{{ switch_config | to_json }}"
 
 - name: "configure the switch through the Mist REST API"
   uri:
-    url: "{{ mist.base_url }}/sites/{{ mist.org_id }}/devices/{{ mist.device_id }}"
+    url: "{{ mist.base_url }}/sites/f37b7c48-91c3-4118-be1b-26882a879fef/devices/00000000-0000-0000-1000-9ccc83ac77a5"
     method: PUT
     return_content: false
     status_code: "200"

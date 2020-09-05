@@ -12,7 +12,7 @@
       Authorization: "Token {{ netbox.token }}"
     force_basic_auth: yes
     validate_certs: false
-  loop: "{{ site_devices }}"
+  loop: "{{ switches }}"
   register: interfaces
 
 - debug:

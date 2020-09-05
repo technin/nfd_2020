@@ -3,7 +3,7 @@
 ### # ---------------------------------------------------
 - name: "Retrieves a list of devices from Netbox"
   uri:
-    url: "{{ netbox.base_url }}/dcim/devices/?site=magnolia"
+    url: "{{ netbox.base_url }}/dcim/devices/?role=switch-l2"
     method: GET
     return_content: yes
     status_code: "200"
@@ -12,10 +12,10 @@
       Authorization: "Token {{ netbox.token }}"
     force_basic_auth: yes
     validate_certs: false
-  register: site_devices
+  register: switches
 
 - set_fact:
-    site_devices: "{{ site_devices.json.results }}"
+    switches: "{{ switches.json.results }}"
 
 - debug:
-    msg: "{{ site_devices }}"
+    msg: "{{ switches }}"
