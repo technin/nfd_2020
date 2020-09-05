@@ -1,10 +1,10 @@
-# ansible_for_juniper_mist
+# nfd_2020
 
 [![N|Solid](https://upload.wikimedia.org/wikipedia/commons/3/31/Juniper_Networks_logo.svg)](https://www.juniper.net/us/en/products-services/sdn/contrail/contrail-service-orchestration/)
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-`Ansible for Juniper Mist` is a demonstration to showcase the ease of automation within Juniper's portfolio, specifically focusing on the following:
+`NFD 2020` is a demonstration to showcase the ease of automation within Juniper's portfolio, specifically focusing on the following:
 
 - manage 100% of your firewall, switches, and access point configurations as code
 - integration with 3rd party APIs
