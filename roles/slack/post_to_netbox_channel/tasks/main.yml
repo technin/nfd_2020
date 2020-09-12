@@ -1,0 +1,34 @@
+### ---------------------------------------------------------------------------
+### BUILD PAYLOAD FOR SITE
+### ---------------------------------------------------------------------------
+- name: "Create a YAML payload with site details"
+  template:
+    src: message.j2
+    dest: /var/tmp/message.yml
+    mode: 0640
+
+- name: Remove blank lines between matches
+  lineinfile:
+    path: /var/tmp/message.yml
+    regexp: '(^\s*$)'
+    state: absent
+
+- name: "set yaml file to yaml_config var"
+  set_fact:
+    yaml_config: "{{ lookup('file','/var/tmp/message.yml') | from_yaml }}"
+
+- name: "debug"
+  debug:
+    msg: "{{ yaml_config }}"
+
+### ---------------------------------------------------------------------------
+### PUSH REPORT TO SLACK
+### ---------------------------------------------------------------------------
+- name: Post Slack message
+  uri:
+    url: "https://hooks.slack.com/services/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"
+    return_content: yes
+    status_code: 200
+    method: POST
+    body: "{{ yaml_config | to_json }}"
+    body_format: json

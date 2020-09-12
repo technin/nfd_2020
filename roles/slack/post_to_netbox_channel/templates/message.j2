@@ -1,0 +1,26 @@
+---
+blocks:
+- type: header
+  text:
+    type: plain_text
+    text: ":signal_strength: Devices in Netbox :signal_strength:"
+- type: context
+  elements:
+  - text: "*Netbox Bot* :robot_face:  |  Retrieve Devices"
+    type: mrkdwn
+- type: divider
+- type: section
+  text:
+    type: mrkdwn
+    text: " :paperclip: *Device Details*"
+{% for each in output %}
+- type: section
+  text:
+    type: mrkdwn
+    text: "*Device Name*: {{ each.name }}\n :white_small_square: {{ each.device_type }}\n :white_small_square: {{ each.device_role }}\n :white_small_square: {{ each.platform }}\n :white_small_square: {{ each.serial }}\n :white_small_square: {{ each.site }}\n :white_small_square: {{ each.status }}\n :white_small_square: {{ each.tags }}\n :white_small_square: {{ each.tenant }}"
+  accessory:
+    type: image
+    image_url: https://raw.githubusercontent.com/packetferret/nfd_2020/master/images/mist.png
+    alt_text: Juniper Mist
+{% endfor %}
+- type: divider

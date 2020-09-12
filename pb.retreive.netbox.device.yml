@@ -12,4 +12,6 @@
       ### # NETBOX WORK
       ### # ---------------------------------------------------
       - { role: netbox/get_devices_from_site }
-      - { role: netbox/get_device_interfaces }
+      - { role: netbox/cleanup_device_from_netbox }
+      # - { role: netbox/get_device_interfaces }
+      - { role: slack/post_to_netbox_channel }

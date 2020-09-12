@@ -1,0 +1,14 @@
+### ---------------------------------------------------------------------------
+### RUN DATA THROUGH FILTER PLUGIN TO CHANGE FORMAT OF DATA MODEL
+### ---------------------------------------------------------------------------
+# - name: "print object 'switches' to terminal"
+#   debug:
+#     msg: "{{ switches }}"
+
+- name: "set new variable output equal to result of filter plugin"
+  set_fact:
+    output: "{{ switches | netbox_to_mist_devices }}"
+
+# - name: "print output to screen"
+#   debug:
+#     msg: "{{ output }}"
