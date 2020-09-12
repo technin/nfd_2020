@@ -26,7 +26,7 @@
 ### ---------------------------------------------------------------------------
 - name: Post Slack message
   uri:
-    url: "https://hooks.slack.com/services/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"
+    url: "https://{{ slack.base_url }}/{{ slack.channel.netbox }}"
     return_content: yes
     status_code: 200
     method: POST

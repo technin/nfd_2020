@@ -28,7 +28,7 @@
 
 - name: "configure the switch through the Mist REST API"
   uri:
-    url: "{{ mist.base_url }}/sites/{{ mist.site_id }}/devices/{{ mist.device_id }}"
+    url: "https://{{ mist.base_url }}/sites/{{ mist.site_id }}/devices/{{ mist.device_id }}"
     method: PUT
     return_content: false
     status_code: "200"

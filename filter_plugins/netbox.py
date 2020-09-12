@@ -37,8 +37,8 @@ def netbox_to_mist_devices(value):
           slug: redtail
     '''
     devices = []
-    network_device = {}
     for each in value:
+        network_device = {}
         network_device["config_context"] = each["config_context"]
         network_device["device_role"] = each["device_role"]["slug"]
         network_device["device_type"] = each["device_type"]["slug"]

@@ -9,6 +9,6 @@
   set_fact:
     output: "{{ switches | netbox_to_mist_devices }}"
 
-# - name: "print output to screen"
-#   debug:
-#     msg: "{{ output }}"
+- name: "print output to screen"
+  debug:
+    msg: "{{ output }}"

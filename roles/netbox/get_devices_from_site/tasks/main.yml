@@ -3,7 +3,7 @@
 ### # ---------------------------------------------------
 - name: "Retrieves a list of devices from Netbox"
   uri:
-    url: "{{ netbox.base_url }}/dcim/devices/?slug={{ site_name }}"
+    url: "https://{{ netbox.base_url }}/dcim/devices/?slug={{ site_name }}"
     method: GET
     return_content: yes
     status_code: "200"
